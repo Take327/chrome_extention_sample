@@ -1,23 +1,17 @@
 {
-    "name": "chrome拡張機能sample",
-    "manifest_version": 3,
-    "version": "1.0.0",
-    "permissions": [
-      "tabs",
-      "storage"
-    ],
-    "action": {
-    },
-    "background": {
-      "service_worker": "background/index.js",
-      "type": "module"
-    },
-    "content_scripts": [
-      {
-        "matches": [],
-        "js": [
-          "content_script/index.js"
-        ]
-      }
-    ]
-  }
+  "name": "chrome拡張機能sample",
+  "manifest_version": 3,
+  "version": "1.0.0",
+  "permissions": ["tabs", "storage"],
+  "action": {},
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*", "https://*"],
+      "js": ["contents.js"]
+    }
+  ]
+}
