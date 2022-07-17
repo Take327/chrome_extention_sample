@@ -5,7 +5,7 @@
   "permissions": ["tabs", "storage"],
   "action": {
     "default_title": "sample_popup",
-    "default_popup": "popup.html"
+    "default_popup": "action/index.html"
   },
 
   "background": {
@@ -14,7 +14,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://*", "https://*"],
+      "matches": ["http://*/", "https://*/"],
       "js": ["contents.js"]
     }
   ]
