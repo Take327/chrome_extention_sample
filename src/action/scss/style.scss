@@ -1,6 +1,9 @@
 $color-primary: #36e8ff;
 
-html {
-    color: #ffffff;
-    background: $color-primary;
+body {
+  background: $color-primary;
+  color: #ffffff;
+  h2 {
+    background-color: #ffffff;
+  }
 }

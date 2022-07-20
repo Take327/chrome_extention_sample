@@ -8,13 +8,13 @@ module.exports = {
   mode: process.env.NODE_ENV || "development",
   //起点となるファイル
   entry: {
-    "dist/background": path.join(__dirname, "src/background/background.ts"),
-    "dist/contents": path.join(__dirname, "src/contents/contents.ts"),
-    "dist/action/js/index": path.join(__dirname, "src/action/action.ts"),
-    "dist/action/css/style":path.join(__dirname, "src/action/scss/style.scss"),
+    "background": path.join(__dirname, "src/background/background.ts"),
+    "contents": path.join(__dirname, "src/contents/contents.ts"),
+    "action/js/index": path.join(__dirname, "src/action/action.ts"),
+    "style.css":path.join(__dirname, "src/action/scss/style.scss"),
   },
   output: {
-    path: __dirname,
+    path: path.join(__dirname, "dist"),
     filename: "[name].js",
   },
   module: {
@@ -44,14 +44,14 @@ module.exports = {
   },
   // publicディレクトリに配置する静的リソースやmanifest.json等を移送する
   plugins: [
-    new CopyWebpackPlugin({ patterns: [{ from: "public/manifest.json", to: "dist" }] }),
+    new CopyWebpackPlugin({ patterns: [{ from: "public/manifest.json", to: "" }] }),
     new HtmlWebpackPlugin({
-      filename: "dist/action/index.html",
+      filename: "action/index.html",
       template: "public/index.html",
-      chunks: ["dist/action/js/index"]
+      chunks: ["action/js/index","style.css"]
     }),
     new MiniCssExtractPlugin({
-			filename: 'dist/action/css/style.css'
+			filename: 'action/css/style.css'
 		}),
     new FixStyleOnlyEntriesPlugin(),
   ],
