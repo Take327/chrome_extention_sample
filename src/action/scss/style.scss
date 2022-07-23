@@ -1,9 +1,12 @@
 $color-primary: #36e8ff;
 
 body {
+  width: 15em;
   background: $color-primary;
-  color: #ffffff;
-  h2 {
-    background-color: #ffffff;
-  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
