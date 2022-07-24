@@ -3,6 +3,7 @@
   "manifest_version": 3,
   "version": "1.0.0",
   "permissions": ["tabs", "storage"],
+  "host_permissions": ["<all_urls>"],
   "action": {
     "default_title": "sample_popup",
     "default_popup": "action/index.html"
@@ -14,7 +15,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://*/", "https://*/"],
+      "matches": ["<all_urls>"],
       "js": ["contents.js"]
     }
   ]

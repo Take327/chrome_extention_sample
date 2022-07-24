@@ -1,32 +1,34 @@
 import { RequestDate, ResponseDate } from '../common/types';
 
-console.log('test');
+(() => {
+    console.log('test');
 
-chrome.runtime.onMessage.addListener(
-  (request: RequestDate, sender, sendResponse: (response: ResponseDate) => void) => {
-    const id = request.id;
+    chrome.runtime.onMessage.addListener(
+        (request: RequestDate, sender, sendResponse: (response: ResponseDate) => void) => {
+            const id = request.id;
 
-    let responce: ResponseDate;
+            let responce: ResponseDate;
 
-    switch (id) {
-    case 'REQUEST_ID_ACTION1':
-      responce = { code: 200, data: 'コンテンツです ACTION1' };
+            switch (id) {
+                case 'REQUEST_ID_ACTION1':
+                    responce = { code: 200, data: 'コンテンツです ACTION1' };
 
-      break;
-    case 'REQUEST_ID_ACTION2':
-      responce = { code: 200, data: 'コンテンツです ACTION2' };
+                    break;
+                case 'REQUEST_ID_ACTION2':
+                    responce = { code: 200, data: 'コンテンツです ACTION2' };
 
-      break;
-    case 'REQUEST_ID_ACTION3':
-      responce = { code: 200, data: 'コンテンツです ACTION3' };
+                    break;
+                case 'REQUEST_ID_ACTION3':
+                    responce = { code: 200, data: 'コンテンツです ACTION3' };
 
-      break;
-    case 'REQUEST_ID_ACTION4':
-      responce = { code: 200, data: 'コンテンツです ACTION4' };
+                    break;
+                case 'REQUEST_ID_ACTION4':
+                    responce = { code: 200, data: 'コンテンツです ACTION4' };
 
-      break;
-    }
+                    break;
+            }
 
-    sendResponse(responce);
-  }
-);
+            sendResponse(responce);
+        }
+    );
+})();
