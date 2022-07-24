@@ -1,4 +1,4 @@
-import { RequestDate, ResponseDate, REQUEST_ID } from './types';
+import { RequestData, ResponseData, REQUEST_ID } from './types';
 
 /**
  * リクエストをバックグラウンドに送信する
@@ -6,15 +6,15 @@ import { RequestDate, ResponseDate, REQUEST_ID } from './types';
  * @param data
  * @return ResponseDate
  */
-export const requestBackground = (id: REQUEST_ID, data: string): Promise<ResponseDate> => {
+export const requestBackground = (id: REQUEST_ID, data: string): Promise<ResponseData<string>> => {
     console.log('Backgroundへリクエストを送信');
-    const requestData: RequestDate = {
+    const requestData: RequestData<string> = {
         id: id,
         data: data,
     };
 
-    return new Promise<ResponseDate>((resolve) => {
-        chrome.runtime.sendMessage(chrome.runtime.id, requestData, (response: ResponseDate) => {
+    return new Promise<ResponseData<string>>((resolve) => {
+        chrome.runtime.sendMessage(chrome.runtime.id, requestData, (response: ResponseData<string>) => {
             resolve(response);
         });
     });
@@ -26,21 +26,21 @@ export const requestBackground = (id: REQUEST_ID, data: string): Promise<Respons
  * @param data
  * @returns
  */
-export const requestContent = (id: REQUEST_ID, data: string): Promise<ResponseDate> => {
+export const requestContent = (id: REQUEST_ID, data: string): Promise<ResponseData<string>> => {
     console.log('contentへリクエスト送信');
-    const requestData: RequestDate = {
+    const requestData: RequestData<string> = {
         id: id,
         data: data,
     };
 
-    return new Promise<ResponseDate>((resolve) => {
+    return new Promise<ResponseData<string>>((resolve) => {
         chrome.tabs.query({}, (tabs) => {
             const id = tabs[0].id;
 
             if (!id) {
-                resolve({ code: 404, data: '送信先が見つかりませんでした' });
+                resolve({ code: 404, message: '送信先が見つかりませんでした', data: '' });
             } else {
-                chrome.tabs.sendMessage(id, requestData, (response: ResponseDate) => {
+                chrome.tabs.sendMessage(id, requestData, (response: ResponseData<string>) => {
                     resolve(response);
                 });
             }
