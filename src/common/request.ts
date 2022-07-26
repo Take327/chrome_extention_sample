@@ -43,7 +43,11 @@ export const requestContent = (id: REQUEST_ID, data: string): Promise<ResponseDa
             } else {
                 chrome.tabs.sendMessage(id, requestData, (response: ResponseData<string>) => {
                     console.log('response', response);
-                    resolve(response);
+                    if (response) {
+                        resolve(response);
+                    } else {
+                        resolve({ code: 404, message: '送信先が見つかりませんでした', data: '' });
+                    }
                 });
             }
         });
