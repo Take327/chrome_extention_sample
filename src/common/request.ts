@@ -34,13 +34,15 @@ export const requestContent = (id: REQUEST_ID, data: string): Promise<ResponseDa
     };
 
     return new Promise<ResponseData<string>>((resolve) => {
-        chrome.tabs.query({}, (tabs) => {
-            const id = tabs[0].id;
+        chrome.tabs.query({ active: true }, (tabs) => {
+            const id = tabs[0].id ? tabs[0].id : undefined;
+            console.log('id', id);
 
-            if (!id) {
+            if (id == undefined) {
                 resolve({ code: 404, message: '送信先が見つかりませんでした', data: '' });
             } else {
                 chrome.tabs.sendMessage(id, requestData, (response: ResponseData<string>) => {
+                    console.log('response', response);
                     resolve(response);
                 });
             }
