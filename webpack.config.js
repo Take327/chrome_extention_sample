@@ -9,9 +9,10 @@ module.exports = {
     //起点となるファイル
     entry: {
         background: path.join(__dirname, 'src/background/background.ts'),
-        contents: path.join(__dirname, 'src/contents/contents.ts'),
+        'contents/js/index': path.join(__dirname, 'src/contents/contents.ts'),
+        'contents/css/style': path.join(__dirname, 'src/contents/scss/style.scss'),
         'action/js/index': path.join(__dirname, 'src/action/action.ts'),
-        'style.css': path.join(__dirname, 'src/action/scss/style.scss'),
+        'action/css/style': path.join(__dirname, 'src/action/scss/style.scss'),
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -45,10 +46,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'action/index.html',
             template: 'public/index.html',
-            chunks: ['action/js/index', 'style.css'],
+            chunks: ['action/js/index', 'action/css/style'],
         }),
         new MiniCssExtractPlugin({
-            filename: 'action/css/style.css',
+            filename: '[name].css',
         }),
         new FixStyleOnlyEntriesPlugin(),
     ],
